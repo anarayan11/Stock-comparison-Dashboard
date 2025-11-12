@@ -31,11 +31,53 @@ st.markdown("""
 st.title("Stock Comparative Analysis Dashboard")
 st.write("Compare two companies’ stock trends, financial metrics, and overall performance — with automatic insights.")
 
+# --- Predefined Ticker List ---
+ticker_options = {
+    "Apple (AAPL)": "AAPL",
+    "Microsoft (MSFT)": "MSFT",
+    "Amazon (AMZN)": "AMZN",
+    "Google (GOOGL)": "GOOGL",
+    "Tesla (TSLA)": "TSLA",
+    "NVIDIA (NVDA)": "NVDA",
+    "Meta (META)": "META",
+    "Reliance Industries (RELIANCE.NS)": "RELIANCE.NS",
+    "TCS (TCS.NS)": "TCS.NS",
+    "Infosys (INFY.NS)": "INFY.NS",
+    "ICICI Bank (ICICIBANK.NS)": "ICICIBANK.NS",
+    "HDFC Bank (HDFCBANK.NS)": "HDFCBANK.NS",
+    "Wipro (WIPRO.NS)": "WIPRO.NS",
+    "Adani Enterprises (ADANIENT.NS)": "ADANIENT.NS",
+    "Toyota (7203.T)": "7203.T",
+    "Samsung Electronics (005930.KS)": "005930.KS",
+    "Nestlé (NESN.SW)": "NESN.SW",
+    "HSBC Holdings (HSBA.L)": "HSBA.L",
+    "Coca-Cola (KO)": "KO",
+    "PepsiCo (PEP)": "PEP",
+}
+
 col1, col2 = st.columns(2)
 with col1:
-    ticker1 = st.text_input("Enter First Company Ticker:", "AAPL")
+    ticker1 = st.selectbox(
+        "Select First Company:",
+        options=list(ticker_options.keys()),
+        index=0,
+        key="ticker1_dropdown"
+    )
+    # Allow manual override
+    custom_ticker1 = st.text_input("Or enter a custom ticker (optional):", "")
+    ticker1 = custom_ticker1.strip().upper() if custom_ticker1 else ticker_options[ticker1]
+
 with col2:
-    ticker2 = st.text_input("Enter Second Company Ticker:", "MSFT")
+    ticker2 = st.selectbox(
+        "Select Second Company:",
+        options=list(ticker_options.keys()),
+        index=1,
+        key="ticker2_dropdown"
+    )
+    # Allow manual override
+    custom_ticker2 = st.text_input("Or enter a custom ticker (optional):", "")
+    ticker2 = custom_ticker2.strip().upper() if custom_ticker2 else ticker_options[ticker2]
+
 
 start_date = st.date_input("Start Date", pd.to_datetime("2023-01-01"))
 end_date = st.date_input("End Date", pd.to_datetime("2025-01-01"))
