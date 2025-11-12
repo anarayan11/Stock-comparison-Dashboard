@@ -64,7 +64,7 @@ with col1:
         key="ticker1_dropdown"
     )
     # Allow manual override
-    custom_ticker1 = st.text_input("Or enter a custom ticker (optional):", "")
+    custom_ticker1 = st.text_input("Or enter a custom ticker (optional):", "", key="custom1")
     ticker1 = custom_ticker1.strip().upper() if custom_ticker1 else ticker_options[ticker1]
 
 with col2:
@@ -75,7 +75,7 @@ with col2:
         key="ticker2_dropdown"
     )
     # Allow manual override
-    custom_ticker2 = st.text_input("Or enter a custom ticker (optional):", "")
+    custom_ticker2 = st.text_input("Or enter a custom ticker (optional):", "", key="custom2")
     ticker2 = custom_ticker2.strip().upper() if custom_ticker2 else ticker_options[ticker2]
 
 
